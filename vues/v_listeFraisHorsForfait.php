@@ -21,7 +21,7 @@ $montant =0;
 			//On récupère date
 			$date = $unFraisHorsForfait['date'];
 			//On récupère montant
-			$montant=$unFraisHorsForfait['id'];
+			$montant=$unFraisHorsForfait['id'];//BUG
 			//On récupère id
 			$id = $unFraisHorsForfait['id'];
 		?>		
@@ -48,12 +48,12 @@ $montant =0;
 				<legend>Nouvel élément hors forfait</legend>
 				<p>
 				  	<!-- On demande à l'utilisateur de saisir la date -->
-				  <label for="txtDateHF">Date (jj/mm/aaaa): </label>
+				  <label for="txtDateHF">Date (jj/mm/aaaa) : </label>
 				  <input type="text" id="txtDateHF" name="dateFrais" size="10" maxlength="10" value=""  />
 				</p>
 				<p>
 					<!-- On demande à l'utilisateur de saisir le libelle -->
-				  <label for="txtLibelleHF">Libellé</label>
+				  <label for="txtLibelleHF">Libellé : </label>
 				  <input type="text" id="txtLibelleHF" name="libelle" size="70" maxlength="256" value="" />
 				</p>
 				<p>
