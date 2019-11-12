@@ -35,7 +35,7 @@ switch($action){
 		$libelle = $_REQUEST['libelle'];
 		$montant = $_REQUEST['montant'];
 		valideInfosFrais($dateFrais,$libelle,$montant);
-		if (nbErreurs() != 0 ){
+		if (nbErreurs() != 0){
 			include("vues/v_erreurs.php");
 		}
 		else{

@@ -136,12 +136,16 @@ class PdoGsb{
 		$lesCles = array_keys($lesFrais);
 		foreach($lesCles as $unIdFrais){
 			$qte = $lesFrais[$unIdFrais];
+			if($qte > cal_days_in_month(CAL_GREGORIAN, date('m'), date('Y')) && $unIdFrais=='NUI'){
+				ajouterErreur("Le nombre de nuitées est trop élevé");
+				include("vues/v_erreurs.php");
+			}else{
 			$req = "update lignefraisforfait set lignefraisforfait.quantite = $qte
 			where lignefraisforfait.idvisiteur = '$idVisiteur' and lignefraisforfait.mois = '$mois'
 			and lignefraisforfait.idfraisforfait = '$unIdFrais'";
 			PdoGsb::$monPdo->exec($req);
-		}
-		
+			}	
+		}		
 	}
 /**
  * met à jour le nombre de justificatifs de la table ficheFrais
