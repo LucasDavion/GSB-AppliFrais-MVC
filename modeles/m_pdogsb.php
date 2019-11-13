@@ -273,8 +273,10 @@ class PdoGsb{
 */	
 	public function getLesInfosFicheFrais($idVisiteur,$mois){
 		$req = "select ficheFrais.idEtat as idEtat, ficheFrais.dateModif as dateModif, ficheFrais.nbJustificatifs as nbJustificatifs, 
-			ficheFrais.montantValide as montantValide from  fichefrais 
-			where fichefrais.idvisiteur ='$idVisiteur' and fichefrais.mois = '$mois'";
+			ficheFrais.montantValide as montantValide, etat.libelle as libelleEtat
+			from  fichefrais
+			join etat on etat.id = ficheFrais.idEtat
+			where fichefrais.idvisiteur ='$idVisiteur' and fichefrais.mois = '$mois'"; 
 		$res = PdoGsb::$monPdo->query($req);
 		$laLigne = $res->fetch();
 		return $laLigne;
