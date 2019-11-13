@@ -43,6 +43,9 @@ switch($action){
 		$dateModif =  $lesInfosFicheFrais['dateModif'];
 		//Conversion de la date en format français
 		$dateModif =  dateAnglaisVersFrancais($dateModif);
+		//on recupere l'etat
+		$etatLibelle = $lesInfosFicheFrais['libelleEtat'];
+
 		//On inclue v_etatFrais.php
 		include("vues/v_etatFrais.php");
 	}

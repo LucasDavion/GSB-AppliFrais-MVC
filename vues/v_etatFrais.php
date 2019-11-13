@@ -7,7 +7,7 @@ $montant = 0;
 <div class="encadre">
 	<p>
 		<!-- On affiche la date de la dernière modification et du montant qui a été validé -->
-		Etat : Dernière modif : <?php echo $dateModif?> <br> Montant validé : <?php echo $montantValide?>
+		Etat :<?php echo $etatLibelle?> <br> Dernière modif : <?php echo $dateModif?> <br> Montant validé : <?php echo $montantValide?>
 			  				 
 	</p>
 	<table class="listeLegere">
