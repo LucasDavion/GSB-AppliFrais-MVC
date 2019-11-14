@@ -21,7 +21,7 @@ $montant =0;
 			//On récupère date
 			$date = $unFraisHorsForfait['date'];
 			//On récupère montant
-			$montant=$unFraisHorsForfait['id'];
+			$montant=$unFraisHorsForfait['montant'];
 			//On récupère id
 			$id = $unFraisHorsForfait['id'];
 		?>		
