@@ -32,7 +32,7 @@ switch($action){
 	// si action contien validerCrationFrais on intitalise des variable avec le $_get si il y a des erreur on appelle v_erreurs.php
 	case 'validerCreationFrais':{
 		$dateFrais = $_REQUEST['dateFrais'];
-		$libelle = $_REQUEST['libelle'];
+		$libelle = $_REQUEST['lstLibelle'];
 		$montant = $_REQUEST['montant'];
 		valideInfosFrais($dateFrais,$libelle,$montant);
 		if (nbErreurs() != 0){

@@ -54,7 +54,7 @@ $montant =0;
 				<p>
 					<!-- On demande à l'utilisateur de saisir le libelle -->
 				  <label for="lstLibelleHF">Libellé : </label>
-				  <select id="lstLibelleHF" name="libelle">
+				  <select id="lstLibelleHF" name="lstLibelle">
 				  <?php
 				//On parcourt la liste lesTypesFraisHorsForfait
 				foreach ($lesTypesFraisHorsForfait as $unFraisH)

@@ -228,7 +228,7 @@ class PdoGsb{
  * @param $date : la date du frais au format français jj//mm/aaaa
  * @param $montant : le montant
 */
-	public function creeNouveauFraisHorsForfait($idVisiteur,$mois,$libelle,$date,$montant){
+	public function creeNouveauFraisHorsForfait($idVisiteur,$mois,$lstLibelle,$date,$montant){
 		$dateFr = dateFrancaisVersAnglais($date);
 		$req = "insert into lignefraishorsforfait 
 		values('','$idVisiteur','$mois','$libelle','$dateFr','$montant')";
