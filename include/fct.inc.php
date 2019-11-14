@@ -149,7 +149,7 @@ function lesQteFraisValides($lesFrais){
  * @param $libelle 
  * @param $montant
  */
-function valideInfosFrais($dateFrais,$libelle,$montant){
+function valideInfosFrais($dateFrais,$lstLibelle,$montant){
 	if($dateFrais==""){
 		ajouterErreur("Le champ date ne doit pas être vide");
 	}
@@ -163,7 +163,7 @@ function valideInfosFrais($dateFrais,$libelle,$montant){
 			}			
 		}
 	}
-	if($libelle == ""){
+	if($lstLibelle == 0){
 		ajouterErreur("Le champ description ne peut pas être vide");
 	}
 	if($montant == ""){
