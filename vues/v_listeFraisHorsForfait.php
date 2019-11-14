@@ -17,11 +17,11 @@ $montant =0;
 		foreach( $lesFraisHorsForfait as $unFraisHorsForfait) 
 		{
 			//On récupère libelle
-			$libelle = $unFraisHorsForfait['libelle'];
+			$libelle = $unFraisHorsForfait['idfraishorsforfait'];
 			//On récupère date
 			$date = $unFraisHorsForfait['date'];
 			//On récupère montant
-			$montant=$unFraisHorsForfait['montant'];
+			$montant=$unFraisHorsForfait['id'];
 			//On récupère id
 			$id = $unFraisHorsForfait['id'];
 		?>		
@@ -53,8 +53,23 @@ $montant =0;
 				</p>
 				<p>
 					<!-- On demande à l'utilisateur de saisir le libelle -->
-				  <label for="txtLibelleHF">Libellé : </label>
-				  <input type="text" id="txtLibelleHF" name="libelle" size="70" maxlength="256" value="" />
+				  <label for="lstLibelleHF">Libellé : </label>
+				  <select id="lstLibelleHF" name="libelle">
+				  <?php
+				//On parcourt la liste lesTypesFraisHorsForfait
+				foreach ($lesTypesFraisHorsForfait as $unFraisH)
+				{
+					//On récupère idfrais
+					$idFrais = $unFraisH['idfraisH'];
+					//On récupère libelle
+					$libellefrais = $unFraisH['libellefraisH'];
+					?>
+
+					<option value=<?php echo $idFrais ?>><?php echo $libellefrais ?></option>
+						<?php
+						}
+						?>
+				  </select>
 				</p>
 				<p>
 					<!-- On demande à l'utilisateur de saisir le montant -->

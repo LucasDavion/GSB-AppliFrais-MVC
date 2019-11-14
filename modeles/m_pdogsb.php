@@ -73,7 +73,7 @@ class PdoGsb{
  * @return tous les champs des lignes de frais hors forfait sous la forme d'un tableau associatif 
 */
 	public function getLesFraisHorsForfait($idVisiteur,$mois){
-	    $req = "select id,idVisiteur,mois,libelle,date from lignefraishorsforfait where lignefraishorsforfait.idvisiteur ='$idVisiteur' 
+	    $req = "select lignefraishorsforfait.id,idVisiteur,mois,idfraishorsforfait ,libelle ,date from lignefraishorsforfait join fraishorsforfait on idfraishorsforfait=fraishorsforfait.id where lignefraishorsforfait.idvisiteur ='$idVisiteur' 
 		and lignefraishorsforfait.mois = '$mois' ";	
 		$res = PdoGsb::$monPdo->query($req);
 		$lesLignes = $res->fetchAll();
@@ -297,6 +297,13 @@ class PdoGsb{
 		$req = "update ficheFrais set idEtat = '$etat', dateModif = now() 
 		where fichefrais.idvisiteur ='$idVisiteur' and fichefrais.mois = '$mois'";
 		PdoGsb::$monPdo->exec($req);
+	}
+
+	public function getLesTypesFraisHorsForfait(){
+		$req = "select fraishorsforfait.id as idfraisH, fraishorsforfait.libelle as libellefraisH from fraishorsforfait order by fraishorsforfait.id";
+		$res = PdoGsb::$monPdo->query($req);
+		$lesLignes = $res->fetchAll();
+		return $lesLignes;
 	}
 }
 ?>
