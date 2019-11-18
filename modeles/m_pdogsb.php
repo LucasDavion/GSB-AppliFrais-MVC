@@ -73,7 +73,7 @@ class PdoGsb{
  * @return tous les champs des lignes de frais hors forfait sous la forme d'un tableau associatif 
 */
 	public function getLesFraisHorsForfait($idVisiteur,$mois){
-	    $req = "select id,idVisiteur,mois,libelle,date from lignefraishorsforfait where lignefraishorsforfait.idvisiteur ='$idVisiteur' 
+	    $req = "select lignefraishorsforfait.id,idVisiteur,montant,mois,idfraishorsforfait ,libelle ,date from lignefraishorsforfait join fraishorsforfait on idfraishorsforfait=fraishorsforfait.id where lignefraishorsforfait.idvisiteur ='$idVisiteur' 
 		and lignefraishorsforfait.mois = '$mois' ";	
 		$res = PdoGsb::$monPdo->query($req);
 		$lesLignes = $res->fetchAll();
@@ -228,10 +228,10 @@ class PdoGsb{
  * @param $date : la date du frais au format français jj//mm/aaaa
  * @param $montant : le montant
 */
-	public function creeNouveauFraisHorsForfait($idVisiteur,$mois,$libelle,$date,$montant){
+	public function creeNouveauFraisHorsForfait($idVisiteur,$mois,$lstLibelle,$date,$montant){
 		$dateFr = dateFrancaisVersAnglais($date);
 		$req = "insert into lignefraishorsforfait 
-		values('','$idVisiteur','$mois','$libelle','$dateFr','$montant')";
+		values(0,'$idVisiteur','$mois','$lstLibelle','$dateFr','$montant')";
 		PdoGsb::$monPdo->exec($req);
 	}
 /**
@@ -297,6 +297,13 @@ class PdoGsb{
 		$req = "update ficheFrais set idEtat = '$etat', dateModif = now() 
 		where fichefrais.idvisiteur ='$idVisiteur' and fichefrais.mois = '$mois'";
 		PdoGsb::$monPdo->exec($req);
+	}
+
+	public function getLesTypesFraisHorsForfait(){
+		$req = "select fraishorsforfait.id as idfraisH, fraishorsforfait.libelle as libellefraisH from fraishorsforfait order by fraishorsforfait.id";
+		$res = PdoGsb::$monPdo->query($req);
+		$lesLignes = $res->fetchAll();
+		return $lesLignes;
 	}
 }
 ?>
