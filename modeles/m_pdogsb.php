@@ -305,5 +305,19 @@ class PdoGsb{
 		$lesLignes = $res->fetchAll();
 		return $lesLignes;
 	}
+
+
+
+
+	public function getLesFichesFraisMoisPrecedentNonCloturer(){
+		date_default_timezone_set('UTC');
+		$mois = date('m');
+		$mois = $mois-1;
+		var_dump($mois);
+		$req = "";
+		$res = PdoGsb::$monPdo->query($req);
+		$lesLignes = $res->fetchAll();
+		return $lesLignes;
+	}
 }
 ?>
