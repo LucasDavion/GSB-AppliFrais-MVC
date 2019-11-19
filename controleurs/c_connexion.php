@@ -35,23 +35,23 @@ switch($action){
 			$prenom = $visiteur['prenom'];
 			$idTypeUtilisateur= $visiteur['idTypeUtilisateur'];
 			connecter($id,$nom,$prenom,$idTypeUtilisateur);
-			if($idTypeUtilisateur = 1){
+			if($idTypeUtilisateur == 1){
 			//on inclue le v_sommaireVisiteur.php
-			include("vues/v_sommaireVisiteur.php");
+			include("vues/v_sommaire_Utilisateur.php");
 			}
-			if($idTypeUtilisateur = 2){
+			if($idTypeUtilisateur == 2){
 			//on inclue le v_sommaireComptable.php
 			include("vues/v_Sommaire_EmpCompt.php");
 			}
-			if($idTypeUtilisateur = 3){
+			if($idTypeUtilisateur == 3){
 			//on inclue le v_sommaireAdministrateur.php
 			include("vues/v_Sommaire_DirCompt.php");
 			}
-			if($idTypeUtilisateur = 4){
+			if($idTypeUtilisateur == 4){
 			//on inclue le v_sommaireDirecteur.php
 			include("vues/v_Sommaire_Admin.php");
 			}
-			//on inclue le v_accueil.php
+					//on inclue le v_accueil.php
 			include("vues/v_accueil.php");
 		}
 		break;

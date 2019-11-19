@@ -1,6 +1,6 @@
 ﻿<?php
 //On inclue v_sommaire.php
-include("vues/v_sommaire.php");
+include("vues/v_sommaire_Utilisateur.php");
 //On récupère l'action selectionner
 $action = $_REQUEST['action'];
 //On récupère l'id du visiteur

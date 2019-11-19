@@ -1,6 +1,6 @@
 <?php
 // inclusion de la vue du sommaire
-include("vues/v_sommaire.php");
+include("vues/v_sommaire_Utilisateur.php");
 // intitalisation des variable
 $idVisiteur = $_SESSION['idVisiteur'];
 $mois = getMois(date("d/m/Y"));
