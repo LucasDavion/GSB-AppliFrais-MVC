@@ -1,8 +1,8 @@
 <div id="contenu">
 	<!-- On affiche le mois et l'année -->
-	<h2>Renseigner ma fiche de frais du mois <?php echo $numMois."-".$numAnnee ?></h2>
+	<h2>Liste des fiches de frais en etat CR</h2>
          
-	<form method="POST"  action="index.php?uc=gererFrais&action=validerMajFraisForfait">
+	<form method="POST"  action="index.php?uc=consultFrais&action=affListNonCL">
 		<div class="corpsForm">
 			<fieldset>
 				<legend>Eléments forfaitisés
