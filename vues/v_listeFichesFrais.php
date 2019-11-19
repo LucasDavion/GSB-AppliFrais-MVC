@@ -2,7 +2,7 @@
     <!-- On affiche le mois et l'année -->
     <h2>Liste des fiches de frais en etat CR</h2>
 
-    <form method="POST" action="index.php?uc=consultFrais&action=affListNonCL">
+    <form method="POST" action="index.php?uc=consultFrais&action=valideMajFraisEtat">
         <div class="corpsForm">
             <fieldset>
                 <legend>Eléments forfaitisés
@@ -10,7 +10,7 @@
                 <table class="table">
                     <thead>
                         <tr>
-                            
+
                             <th scope="col">IdVisiteur</th>
                             <th scope="col">Nombre Justificatif</th>
                             <th scope="col">MontantValide</th>
@@ -29,11 +29,11 @@
                             ?>
 
                             <tr>
-                                
-                                <td><?php echo $idVisiteur?></td>
-                                <td><?php echo $nbJustificatifs?></td>
-                                <td><?php echo $montantValide?></td>
-                                
+
+                                <td><?php echo $idVisiteur ?></td>
+                                <td><?php echo $nbJustificatifs ?></td>
+                                <td><?php echo $montantValide ?></td>
+
                             </tr>
 
                         <?php
@@ -44,11 +44,9 @@
             </fieldset>
         </div>
         <div class="piedForm">
-            <p>
-                <!-- Bouton valider -->
-                <input id="ok" type="submit" value="Valider" size="20" />
-                <!-- Bouton effacer -->
-                <input id="annuler" type="reset" value="Effacer" size="20" />
-            </p>
+            
+                    <!-- Bouton valider -->
+                    <input id="ok" type="submit" value="Valider" size="20" />
+                
         </div>
     </form>

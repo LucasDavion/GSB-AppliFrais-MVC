@@ -14,6 +14,18 @@ switch ($action) {
     include("vues/v_listeFichesFrais.php");
         break;
 
+    case 'valideMajFraisEtat':
+    try {
+        $LaDate = getDateDernierJourMoisPrecedent();
+        $pdo->majEtatFicheFraisCL($LaDate);
+        $lesFraisForfait = $pdo->getLesFichesFraisMoisPrecedentNonCloturer();
+        include("vues/v_listeFichesFrais.php");
+    } catch (\Throwable $th) {
+        ajouterErreur("Erreur lors de la modification : $th");
+			include("vues/v_erreurs.php");
+    }	
+    break;
+
     case 'CLFicheNonCL':
     # code...
     break;
