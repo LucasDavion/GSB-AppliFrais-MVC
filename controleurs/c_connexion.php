@@ -41,7 +41,15 @@ switch($action){
 			}
 			if($idTypeUtilisateur = 2){
 			//on inclue le v_sommaireComptable.php
-			include("vues/v_sommaireComptable.php");
+			include("vues/v_Sommaire_EmpCompt.php");
+			}
+			if($idTypeUtilisateur = 3){
+			//on inclue le v_sommaireAdministrateur.php
+			include("vues/v_Sommaire_DirCompt.php");
+			}
+			if($idTypeUtilisateur = 4){
+			//on inclue le v_sommaireDirecteur.php
+			include("vues/v_Sommaire_Admin.php");
 			}
 			//on inclue le v_accueil.php
 			include("vues/v_accueil.php");
