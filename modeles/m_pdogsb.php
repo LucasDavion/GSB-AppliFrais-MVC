@@ -315,15 +315,15 @@ class PdoGsb{
 		date_default_timezone_set('UTC');
 		$mois = date('m');
 		$mois = $mois-1;
-		$mois = '2019'+ $mois;
+		$mois = '2019'.$mois;
 		var_dump($mois);
-		$req = "select idVisiteur, nbJustificatifs, montantValide,  from ficheFrais where idEtat = 'CL' and date";
+		$req = "select idVisiteur, nbJustificatifs, montantValide from ficheFrais where idEtat = 'CL'";
 		$res = PdoGsb::$monPdo->query($req);
 		$lesLignes = $res->fetchAll();
 		return $lesLignes;
 	}
 
 
-	
+
 }
 ?>

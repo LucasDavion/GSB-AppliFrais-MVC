@@ -37,7 +37,7 @@ switch($uc){
 	}
 	case 'consultFrais' :{
 		//on inclue le c_etatFrais.php
-		include("controleurs/c_listeFichesFrais.php");
+		include("controleurs/c_gererCloture.php");
 		break; 
 	}
 

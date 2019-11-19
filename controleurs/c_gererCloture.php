@@ -10,7 +10,7 @@ $action = $_REQUEST['action'];
 
 switch ($action) {
     case 'affListNonCL':
-    $lesFraisHorsForfait = $pdo->getLesFichesFraisMoisPrecedentNonCloturer();
+    $lesFraisForfait = $pdo->getLesFichesFraisMoisPrecedentNonCloturer();
     include("vues/v_listeFichesFrais.php");
         break;
 

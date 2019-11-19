@@ -1,41 +1,54 @@
 <div id="contenu">
-	<!-- On affiche le mois et l'année -->
-	<h2>Liste des fiches de frais en etat CR</h2>
-         
-	<form method="POST"  action="index.php?uc=consultFrais&action=affListNonCL">
-		<div class="corpsForm">
-			<fieldset>
-				<legend>Eléments forfaitisés
-				</legend>
-				<?php
-				//On parcourt la liste lesFraisForfait
-				foreach ($lesFraisForfait as $unFrais)
-				{
-					//On récupère idfrais
-					$idFrais = $unFrais['idfrais'];
-					//On récupère libelle
-					$libelle = $unFrais['libelle'];
-					//On récupère quantite
-					$quantite = $unFrais['quantite'];
-					?>
-					<p>
-						<!-- On affiche le libelle -->
-						<label for="idFrais"><?php echo $libelle ?></label>
-						<!-- On affiche la quantite -->
-						<input type="text" id="idFrais" name="lesFrais[<?php echo $idFrais?>]" size="10" maxlength="5" value="<?php echo $quantite?>" >
-					</p>
+    <!-- On affiche le mois et l'année -->
+    <h2>Liste des fiches de frais en etat CR</h2>
 
-				<?php
-				}
-				?>
-			</fieldset>
-		</div>
-		<div class="piedForm">
-			<p>
-				<!-- Bouton valider -->
-				<input id="ok" type="submit" value="Valider" size="20" />
-				<!-- Bouton effacer -->
-				<input id="annuler" type="reset" value="Effacer" size="20" />
-			</p> 
-		</div>
+    <form method="POST" action="index.php?uc=consultFrais&action=affListNonCL">
+        <div class="corpsForm">
+            <fieldset>
+                <legend>Eléments forfaitisés
+                </legend>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            
+                            <th scope="col">IdVisiteur</th>
+                            <th scope="col">Nombre Justificatif</th>
+                            <th scope="col">MontantValide</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php
+                        //On parcourt la liste lesFraisForfait
+                        foreach ($lesFraisForfait as $unFrais) {
+                            //On récupère idfrais
+                            $idVisiteur = $unFrais['idVisiteur'];
+                            //On récupère libelle
+                            $nbJustificatifs = $unFrais['nbJustificatifs'];
+                            //On récupère quantite
+                            $montantValide = $unFrais['montantValide'];
+                            ?>
+
+                            <tr>
+                                
+                                <td><?php echo $idVisiteur?></td>
+                                <td><?php echo $nbJustificatifs?></td>
+                                <td><?php echo $montantValide?></td>
+                                
+                            </tr>
+
+                        <?php
+                        }
+                        ?>
+                    </tbody>
+                </table>
+            </fieldset>
+        </div>
+        <div class="piedForm">
+            <p>
+                <!-- Bouton valider -->
+                <input id="ok" type="submit" value="Valider" size="20" />
+                <!-- Bouton effacer -->
+                <input id="annuler" type="reset" value="Effacer" size="20" />
+            </p>
+        </div>
     </form>
