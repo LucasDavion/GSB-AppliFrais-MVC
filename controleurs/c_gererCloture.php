@@ -17,7 +17,8 @@ switch ($action) {
     case 'valideMajFraisEtat':
     try {
         $LaDate = getDateDernierJourMoisPrecedent();
-        $pdo->majEtatFicheFraisCL($LaDate);
+        $LaDateAnglais = dateFrancaisVersAnglais($LaDate);
+        $pdo->majEtatFicheFraisCL($LaDateAnglais);
         $lesFraisForfait = $pdo->getLesFichesFraisMoisPrecedentNonCloturer();
         include("vues/v_listeFichesFrais.php");
     } catch (\Throwable $th) {
