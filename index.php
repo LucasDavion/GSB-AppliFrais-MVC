@@ -40,6 +40,11 @@ switch($uc){
 		include("controleurs/c_listeFichesFrais.php");
 		break; 
 	}
+	case 'consultFrais' :{
+		//on inclue le c_gererValidant.php
+		include("controleurs/c_gererValidant.php");
+		break; 
+	}
 
 }
 include("vues/v_pied.php") ;
