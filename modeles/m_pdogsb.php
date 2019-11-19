@@ -325,7 +325,9 @@ class PdoGsb{
 	}
 
 	public function getLesInfosFicheCL(){
-		$req = "select * from fichefrais where idEtat='CL'"; 
+		$req = "select idVisiteur, mois, nom, prenom 
+		from fichefrais inner join visiteur on idVisiteur=visiteur.id 
+		where idEtat='CL'"; 
 		$res = PdoGsb::$monPdo->query($req);
 		$laLigne = $res->fetch();
 		return $laLigne;

@@ -55,10 +55,8 @@ switch($action){
 }
 
 // on recuperre les frais et on inclut les vue des frais
-$lesFraisHorsForfait = $pdo->getLesFraisHorsForfait($idVisiteur,$mois);
-$lesFraisForfait= $pdo->getLesFraisForfait($idVisiteur,$mois);
-$lesTypesFraisHorsForfait = $pdo->getLesTypesFraisHorsForfait();
-include("vues/v_listeFraisForfait.php");
-include("vues/v_listeFraisHorsForfait.php");
+$$lesFichesFraisCL = $pdo->getLesInfosFicheCL();
+include("vues/v_listeFicheCL.php");
+include("vues/v_fraisHorsForfait.php");
 
 ?>
