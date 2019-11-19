@@ -33,9 +33,16 @@ switch($action){
 			$id = $visiteur['id'];
 			$nom = $visiteur['nom'];
 			$prenom = $visiteur['prenom'];
-			connecter($id,$nom,$prenom);
-			//on inclue le v_sommaire.php
-			include("vues/v_sommaire.php");
+			$idTypeUtilisateur= $visiteur['idTypeUtilisateur'];
+			connecter($id,$nom,$prenom,$idTypeUtilisateur);
+			if($idTypeUtilisateur = 1){
+			//on inclue le v_sommaireVisiteur.php
+			include("vues/v_sommaireVisiteur.php");
+			}
+			if($idTypeUtilisateur = 2){
+			//on inclue le v_sommaireComptable.php
+			include("vues/v_sommaireComptable.php");
+			}
 			//on inclue le v_accueil.php
 			include("vues/v_accueil.php");
 		}
