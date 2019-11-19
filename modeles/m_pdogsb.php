@@ -323,5 +323,16 @@ class PdoGsb{
 		return $lesLignes;
 	}
 
+	public function getLesInfosFicheCL($idVisiteur,$mois){
+		$req = "select ficheFrais.idEtat as idEtat, ficheFrais.dateModif as dateModif, ficheFrais.nbJustificatifs as nbJustificatifs, 
+			ficheFrais.montantValide as montantValide, etat.libelle as libelleEtat
+			from  fichefrais
+			join etat on etat.id = ficheFrais.idEtat
+			where fichefrais.idvisiteur ='$idVisiteur' and fichefrais.mois = '$mois' and idEtat='CL'"; 
+		$res = PdoGsb::$monPdo->query($req);
+		$laLigne = $res->fetch();
+		return $laLigne;
+	}
+
 }
 ?>
