@@ -148,6 +148,21 @@ class PdoGsb{
 			}	
 		}		
 	}
+	public function majFraisForfait($idVisiteur, $mois, $lesFrais, $dateModif ,$idVisiteurModif){
+		$lesCles = array_keys($lesFrais);
+		foreach($lesCles as $unIdFrais){
+			$qte = $lesFrais[$unIdFrais];
+			if($qte > cal_days_in_month(CAL_GREGORIAN, date('m'), date('Y')) && $unIdFrais=='NUI'){
+				ajouterErreur("Le nombre de nuitées est trop élevé");
+				include("vues/v_erreurs.php");
+			}else{
+			$req = "update lignefraisforfait set lignefraisforfait.quantite = $qte
+			where lignefraisforfait.idvisiteur = '$idVisiteur' and lignefraisforfait.mois = '$mois'
+			and lignefraisforfait.idfraisforfait = '$unIdFrais' and dateModif='$dateModif' and idUtilisateur='$idVisiteurModif'";
+			PdoGsb::$monPdo->exec($req);
+			}	
+		}		
+	}
 /**
  * met à jour le nombre de justificatifs de la table ficheFrais
  * pour le mois et le visiteur concerné
@@ -242,6 +257,10 @@ class PdoGsb{
 */
 	public function supprimerFraisHorsForfait($idFrais){
 		$req = "delete from lignefraishorsforfait where lignefraishorsforfait.id =$idFrais ";
+		PdoGsb::$monPdo->exec($req);
+	}
+	public function supprimerFraisHorsForfaitValidant($idFrais){
+		$req = "update lignefraishorsforfait set suppO/N='O' where lignefraishorsforfait.id =$idFrais ";
 		PdoGsb::$monPdo->exec($req);
 	}
 /**
