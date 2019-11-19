@@ -203,7 +203,7 @@ function getDateDernierJourMoisPrecedent(){
   @list($jour,$mois,$annee)=explode('/',$dateJour);
   $mois--;
   $nbJourMoisPasse=cal_days_in_month(CAL_GREGORIAN,date('m',$mois),date('Y',$annee));
-	return ".$annee."-".$mois."-".$nbJourMoisPasse.";
+	return $annee."-".$mois."-".$nbJourMoisPasse;
 	
 }
 ?>
