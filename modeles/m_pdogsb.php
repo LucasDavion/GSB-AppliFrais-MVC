@@ -317,7 +317,7 @@ class PdoGsb{
 		$mois = $mois-1;
 		$mois = '2019'+ $mois;
 		var_dump($mois);
-		$req = "select * from ficheFrais where idEtat = 'CL' and date";
+		$req = "select idVisiteur, nbJustificatifs, montantValide,  from ficheFrais where idEtat = 'CL' and date";
 		$res = PdoGsb::$monPdo->query($req);
 		$lesLignes = $res->fetchAll();
 		return $lesLignes;
