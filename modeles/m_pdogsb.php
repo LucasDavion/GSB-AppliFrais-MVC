@@ -121,7 +121,7 @@ class PdoGsb{
 		$lesLignes = $res->fetchAll();
 		return $lesLignes;
 	}
-  public function getLesIdFrais($idGrade){
+  public function getLesIdFraisEnFonctionDuGrade($idGrade){
     $req = "select fraisforfait.id as idfrais from fraisforfait order by fraisforfait.id JOIN gradeFraisForfait on FraisForfait.id = idFraisForfait WHERE idGrade = '$idGrade'";
 		$res = PdoGsb::$monPdo->query($req);
 		$lesLignes = $res->fetchAll();
