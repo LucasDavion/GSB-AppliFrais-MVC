@@ -306,18 +306,22 @@ class PdoGsb{
 		return $lesLignes;
 	}
 
-
-
+/**
+ * ---
+ * @param $mois sous la forme aaaamm
+ */
 
 	public function getLesFichesFraisMoisPrecedentNonCloturer(){
 		date_default_timezone_set('UTC');
 		$mois = date('m');
 		$mois = $mois-1;
+		$mois = '2019'+ $mois;
 		var_dump($mois);
-		$req = "";
+		$req = "select * from ficheFrais where idEtat = 'CL' and date";
 		$res = PdoGsb::$monPdo->query($req);
 		$lesLignes = $res->fetchAll();
 		return $lesLignes;
 	}
+
 }
 ?>
