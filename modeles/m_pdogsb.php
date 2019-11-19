@@ -304,7 +304,7 @@ class PdoGsb{
 		$res = PdoGsb::$monPdo->query($req);
 		$lesLignes = $res->fetchAll();
 		return $lesLignes;
-	}
+	} 
 
 /**
  * ---
