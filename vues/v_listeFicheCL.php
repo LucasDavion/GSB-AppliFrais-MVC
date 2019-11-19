@@ -1,21 +1,19 @@
 <div id="contenu">
     <form method="POST"  action="index.php?uc=gererValidant&action=selectionnerFicheFrais">
     <select>
-    </select>
+    </select name="lstFicheFrais">
         <?php			 
 			foreach ($lesFichesFraisCL as $uneFiche)
 			{
 				
-                $idFicheFrais =$uneFiche['idVisiteur'];
-                
-                $mois =$uneFiche['mois'];
+                $idFicheFrais =$uneFiche['idVisiteur']." ".$uneFiche['mois'];
 				
-                $nomVisiteur =$uneFiche['nomVisiteur'];
+                $nomVisiteur =$uneFiche['nom'];
 
-                $prenomVisiteur =$uneFiche['prenomVisiteur'];
+                $prenomVisiteur =$uneFiche['prenom'];
 				?>
 
-				<option value=<?php echo $idFicheFrais.$mois ?>><?php echo $nomVisiteur." ".$prenomVisiteur ?></option>
+				<option value=<?php echo $idFicheFrais ?>><?php echo $nomVisiteur." ".$prenomVisiteur ?></option>
 				<?php
 			}
 		?>
