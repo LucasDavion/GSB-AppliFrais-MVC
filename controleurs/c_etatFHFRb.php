@@ -9,6 +9,21 @@ $numAnnee =substr( $mois,0,4);
 $numMois =substr( $mois,4,2);
 $action = $_REQUEST['action'];
 
+switch($action){
+	// si action contrien saisireFrais alors, si c'est le premier frais du mois on cree une nouvelle lignes de frais
+	case 'consultationEtatFHFRb':{
+
+		$lesMois = $pdo->getLesMoisDisponibles($idVisiteur);
+
+		
+
+		include ("vues/v_listeMoisFHF.php");
+
+		
+		break;
+	}
+}
+
 
 
 

@@ -56,6 +56,8 @@ $montant = 0;
 			$date = $unFraisHorsForfait['date'];
 			//On récupère lae libelle
 			$libelle = $unFraisHorsForfait['libelle'];
+
+			$montant = $unFraisHorsForfait['montant'];
 			?>
 			<tr>
 				<!-- On affiche la date -->

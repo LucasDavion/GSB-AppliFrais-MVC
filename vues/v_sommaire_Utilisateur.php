@@ -1,4 +1,6 @@
-﻿    <!-- Division pour le sommaire -->
+﻿
+
+    <!-- Division pour le sommaire -->
     <div id="menuGauche">
 		<div id="infosUtil">
 		</div>  
