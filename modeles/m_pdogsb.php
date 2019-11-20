@@ -345,5 +345,19 @@ class PdoGsb{
 		where idEtat = 'CR' and fichefrais.mois = '$mois' and idVisiteur = '$idVisiteur'";
 		PdoGsb::$monPdo->exec($req);
 	}
+
+	public function getLesFichesFraisParVisiteur($idVisiteur,$etat){
+		$req = "select mois, nbJustificatifs, montantValide, dateModif where idVisiteur = '$idVisiteur' and idEtat = $etat";
+		PdoGsb::$monPdo->exec($req);
+	}
+
+	public function getLesEtatsDisponibles(){
+		$req = "select id, libelle from etat";
+		$res = PdoGsb::$monPdo->query($req);
+		$lesEtats = $res->fetchAll();
+		return $lesEtats;
+	}
+
+
 }
 ?>

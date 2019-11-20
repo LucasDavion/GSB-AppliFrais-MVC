@@ -27,7 +27,7 @@ switch ($action) {
         if ($lesFraisForfait = $pdo->getLesFicheFraisCR()) {
             include("vues/v_listeFichesFrais.php");
         }else {
-            $message = "Toutes les fiches de frais ont etait clorturer";
+            $message = "Toutes les fiches de frais ont été clorturées";
             include("vues/v_etatFichesFrais.php");
             
         }

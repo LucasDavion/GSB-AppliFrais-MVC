@@ -13,6 +13,9 @@
 					<a href="index.php?uc=consultFrais&action=affListNonCL" title="Consultation des frais non cloturer">Consultation des frais non cloturer</a>
 				</li>
 				<li class="smenu">
+					<a href="index.php?uc=consultEtatFraisVisiteur&action=selectionnerEtat" title="Se déconnecter">cns</a>
+				</li>
+				<li class="smenu">
 					<a href="index.php?uc=connexion&action=deconnexion" title="Se déconnecter">Déconnexion</a>
 				</li>
 			</ul>

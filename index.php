@@ -40,6 +40,11 @@ switch($uc){
 		include("controleurs/c_gererCloture.php");
 		break; 
 	}
+	case 'consultEtatFraisVisiteur' :{
+		//on inclue le c_etatFrais.php
+		include("controleurs/c_etatFichesFraisEtat.php");
+		break; 
+	}
 
 }
 include("vues/v_pied.php") ;

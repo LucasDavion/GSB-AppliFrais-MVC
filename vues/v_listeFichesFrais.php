@@ -5,8 +5,7 @@
     <form method="POST" action="index.php?uc=consultFrais&action=valideMajFraisEtat">
         <div class="corpsForm">
             <fieldset>
-                <legend>Eléments forfaitisés
-                </legend>
+
                 <table class="table">
                     <thead>
                         <tr>
@@ -23,12 +22,10 @@
                             $prenom = $unFrais['nom'];
                             $nom = $unFrais['prenom'];
                             $nbJustificatifs = $unFrais['nbJustificatifs'];
-                            
                             $montantValide = $unFrais['montantValide'];
                             ?>
-
                             <tr>
-                                <td><?php echo $nom." ".$prenom ?></td>
+                                <td><?php echo $nom . " " . $prenom ?></td>
                                 <td><?php echo $nbJustificatifs ?></td>
                                 <td><?php echo $montantValide ?></td>
                             </tr>
@@ -40,7 +37,7 @@
             </fieldset>
         </div>
         <div class="piedForm">
-                    <!-- Bouton valider -->
-                    <input id="ok" type="submit" value="Valider" size="20" />
+            <!-- Bouton valider -->
+            <input id="ok" type="submit" value="Cloturer toutes les fiches de frais" size="20" />
         </div>
     </form>
