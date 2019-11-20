@@ -110,7 +110,6 @@ class PdoGsb{
 		$lesLignes = $res->fetchAll();
 		return $lesLignes;
 	}
-
 /**
  * Retourne tous les id de la table FraisForfait
 

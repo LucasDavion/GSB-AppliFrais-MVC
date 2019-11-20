@@ -1,8 +1,9 @@
-<form method="POST"  action="index.php?uc=gererValidant&action=validerMajFraisForfait">
+<form method="POST"  action="index.php?uc=gererValidant&action=validerFF">
 <div class="corpsForm">
   <fieldset>
     <legend>Eléments forfaitisés
     </legend>
+    <h2>Fiche de frais de <?php echo $idFicheFrais[0]." ".$idFicheFrais[1] ?></h2>
     <?php
     //On parcourt la liste lesFraisForfait
     foreach ($lesFraisForfait as $unFrais)

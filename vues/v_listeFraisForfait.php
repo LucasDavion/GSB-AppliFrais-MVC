@@ -1,7 +1,5 @@
 <div id="contenu">
-	<!-- On affiche le mois et l'année -->
-	<h2>Renseigner ma fiche de frais du mois <?php echo $numMois."-".$numAnnee ?></h2>
-         
+	<!-- On affiche le mois et l'année -->        
 	<form method="POST"  action="index.php?uc=gererFrais&action=validerMajFraisForfait">
 		<div class="corpsForm">
 			<fieldset>
