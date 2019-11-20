@@ -33,7 +33,8 @@ switch($action){
 			$id = $visiteur['id'];
 			$nom = $visiteur['nom'];
 			$prenom = $visiteur['prenom'];
-			connecter($id,$nom,$prenom);
+			$grade = $visiteur['grade'];
+			creerVarSession($id,$nom,$prenom,$grade);
 			//on inclue le v_sommaire.php
 			include("vues/v_sommaire.php");
 			//on inclue le v_accueil.php

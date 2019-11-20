@@ -7,24 +7,24 @@ $montant =0;
 		</caption>
 		<tr>
 			<th class="date">Date</th>
-			<th class="libelle">Libellé</th>  
-			<th class="montant">Montant</th>  
-			<th class="action">&nbsp;</th>              
+			<th class="libelle">Libellé</th>
+			<th class="montant">Montant</th>
+			<th class="action">&nbsp;</th>
 		</tr>
-		  
-		<?php 
+
+		<?php
 		//On parcourt la liste lesFraisHorsForfait
-		foreach( $lesFraisHorsForfait as $unFraisHorsForfait) 
+		foreach( $lesFraisHorsForfait as $unFraisHorsForfait)
 		{
 			//On récupère libelle
-			$libelle = $unFraisHorsForfait['idfraishorsforfait'];
+			$libelle = $unFraisHorsForfait['libelle'];
 			//On récupère date
 			$date = $unFraisHorsForfait['date'];
 			//On récupère montant
 			$montant=$unFraisHorsForfait['montant'];
 			//On récupère id
 			$id = $unFraisHorsForfait['id'];
-		?>		
+		?>
 			<tr>
 				<!-- On affiche la date -->
 				<td> <?php echo $date ?></td>
@@ -33,13 +33,13 @@ $montant =0;
 				<!-- On affiche le montant -->
 				<td><?php echo $montant ?></td>
 				<!-- Suppression du frais -->
-				<td><a href="index.php?uc=gererFrais&action=supprimerFrais&idFrais=<?php echo $id ?>" 
+				<td><a href="index.php?uc=gererFrais&action=supprimerFrais&idFrais=<?php echo $id ?>"
 				onclick="return confirm('Voulez-vous vraiment supprimer ce frais?');">Supprimer ce frais</a></td>
 			 </tr>
-		<?php		 
-		  
+		<?php
+
 		}
-		?>	                                           
+		?>
 	</table>
 	<form action="index.php?uc=gererFrais&action=validerCreationFrais" method="post">
 
@@ -54,7 +54,7 @@ $montant =0;
 				<p>
 					<!-- On demande à l'utilisateur de saisir le libelle -->
 				  <label for="lstLibelleHF">Libellé : </label>
-				  <select id="lstLibelleHF" name="lstLibelle">
+					<select id="lstLibelleHF" name="lstLibelle">
 				  <?php
 				//On parcourt la liste lesTypesFraisHorsForfait
 				foreach ($lesTypesFraisHorsForfait as $unFraisH)
@@ -84,10 +84,8 @@ $montant =0;
 				<input id="ajouter" type="submit" value="Ajouter" size="20" />
 				<!-- Bouton effacer -->
 				<input id="effacer" type="reset" value="Effacer" size="20" />
-			</p> 
+			</p>
 		</div>
-			
+
 	</form>
 </div>
-  
-
