@@ -73,7 +73,7 @@ class PdoGsb{
  * @return tous les champs des lignes de frais hors forfait sous la forme d'un tableau associatif
 */
 	public function getLesFraisHorsForfait($idVisiteur,$mois){
-	    $req = "select lignefraishorsforfait.id,idVisiteur,montant,mois,idfraishorsforfait ,libelle ,date from lignefraishorsforfait join fraishorsforfait on idfraishorsforfait=fraishorsforfait.id where lignefraishorsforfait.idvisiteur ='$idVisiteur'
+	    $req = "select lignefraishorsforfait.id,idVisiteur,montant,mois,libelle ,date from lignefraishorsforfait where lignefraishorsforfait.idvisiteur ='$idVisiteur'
 		and lignefraishorsforfait.mois = '$mois' ";
 		$res = PdoGsb::$monPdo->query($req);
 		$lesLignes = $res->fetchAll();
@@ -122,7 +122,7 @@ class PdoGsb{
 		return $lesLignes;
 	}
   public function getLesIdFraisEnFonctionDuGrade($idGrade){
-    $req = "select fraisforfait.id as idfrais from fraisforfait order by fraisforfait.id JOIN gradeFraisForfait on FraisForfait.id = idFraisForfait WHERE idGrade = '$idGrade'";
+    $req = "select fraisforfait.id as idfrais from fraisforfait JOIN gradeFraisForfait on FraisForfait.id = idFraisForfait WHERE idGrade = '$idGrade' order by fraisforfait.id";
 		$res = PdoGsb::$monPdo->query($req);
 		$lesLignes = $res->fetchAll();
 		return $lesLignes;
@@ -205,8 +205,9 @@ class PdoGsb{
  * avec un idEtat à 'CR' et crée les lignes de frais forfait de quantités nulles
  * @param $idVisiteur
  * @param $mois sous la forme aaaamm
+ *@param $idGrade
 */
-	public function creeNouvellesLignesFrais($idVisiteur,$mois){
+	public function creeNouvellesLignesFrais($idVisiteur,$mois,$idGrade){
 		$dernierMois = $this->dernierMoisSaisi($idVisiteur);
 		$laDerniereFiche = $this->getLesInfosFicheFrais($idVisiteur,$dernierMois);
 		if($laDerniereFiche['idEtat']=='CR'){
@@ -216,12 +217,22 @@ class PdoGsb{
 		$req = "insert into fichefrais(idvisiteur,mois,nbJustificatifs,montantValide,dateModif,idEtat)
 		values('$idVisiteur','$mois',0,0,now(),'CR')";
 		PdoGsb::$monPdo->exec($req);
-		$lesIdFrais = $this->getLesIdFrais();
-		foreach($lesIdFrais as $uneLigneIdFrais){
-			$unIdFrais = $uneLigneIdFrais['idfrais'];
-			$req = "insert into lignefraisforfait(idvisiteur,mois,idFraisForfait,quantite)
-			values('$idVisiteur','$mois','$unIdFrais',0)";
-			PdoGsb::$monPdo->exec($req);
+    if ($idGrade!=0) {
+      $lesIdFrais = $this->getLesIdFraisEnFonctionDuGrade($idGrade);
+  		foreach($lesIdFrais as $uneLigneIdFrais){
+  			$unIdFrais = $uneLigneIdFrais['idfrais'];
+  			$req = "insert into lignefraisforfait(idvisiteur,mois,idFraisForfait,quantite)
+  			values('$idVisiteur','$mois','$unIdFrais',0)";
+  			PdoGsb::$monPdo->exec($req);
+      }
+    }else {
+      $lesIdFrais = $this->getLesIdFrais();
+  		foreach($lesIdFrais as $uneLigneIdFrais){
+  			$unIdFrais = $uneLigneIdFrais['idfrais'];
+  			$req = "insert into lignefraisforfait(idvisiteur,mois,idFraisForfait,quantite)
+  			values('$idVisiteur','$mois','$unIdFrais',0)";
+  			PdoGsb::$monPdo->exec($req);
+    }
 		 }
 	}
 /**
@@ -234,10 +245,10 @@ class PdoGsb{
  * @param $date : la date du frais au format français jj//mm/aaaa
  * @param $montant : le montant
 */
-	public function creeNouveauFraisHorsForfait($idVisiteur,$mois,$lstLibelle,$date,$montant){
+	public function creeNouveauFraisHorsForfait($idVisiteur,$mois,$txtLibelleHF,$date,$montant){
 		$dateFr = dateFrancaisVersAnglais($date);
 		$req = "insert into lignefraishorsforfait
-		values(0,'$idVisiteur','$mois','$lstLibelle','$dateFr','$montant')";
+		values(0,'$idVisiteur','$mois','$txtLibelleHF','$dateFr','$montant')";
 		PdoGsb::$monPdo->exec($req);
 	}
 /**
