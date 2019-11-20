@@ -40,6 +40,11 @@ switch($uc){
 		include("controleurs/c_listeFichesFrais.php");
 		break; 
 	}
+	case 'etatFHFRb' :{
+		//on inclue le c_etatFrais.php
+		include("controleurs/c_etatFHFRb.php");
+		break; 
+	}
 
 }
 include("vues/v_pied.php") ;
