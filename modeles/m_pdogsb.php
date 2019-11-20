@@ -314,7 +314,7 @@ class PdoGsb{
  * @param $mois sous la forme aaaamm
  */
 
-	public function getLesFichesFraisMoisPrecedentNonCloturer(){
+	public function getLesFicheFraisCR(){
 		date_default_timezone_set('UTC');
 		$mois = date('m');
 		$mois = $mois-1;
@@ -326,7 +326,7 @@ class PdoGsb{
 		return $lesLignes;
 	}
 
-	public function majEtatFicheFraisCL($LaDate){
+	public function majFicheFraisCL($LaDate){
 		date_default_timezone_set('UTC');
 		$mois = date('m');
 		$mois = $mois-1;
@@ -334,6 +334,13 @@ class PdoGsb{
 		var_dump($LaDate);
 		$req = "update ficheFrais set idEtat = 'CL', dateModif = '$LaDate' 
 		where idEtat = 'CR' and fichefrais.mois = '$mois'";
+		PdoGsb::$monPdo->exec($req);
+	}
+
+	public function majPrecedentMoisCL($idVisiteur,$mois, $LaDate){
+		var_dump($mois);
+		$req = "update ficheFrais set idEtat = 'CL', dateModif = '$LaDate' 
+		where idEtat = 'CR' and fichefrais.mois = '$mois' and idVisiteur = '$idVisiteur'";
 		PdoGsb::$monPdo->exec($req);
 	}
 }

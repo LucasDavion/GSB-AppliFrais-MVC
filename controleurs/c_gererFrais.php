@@ -13,6 +13,9 @@ switch($action){
 	// si action contrien saisireFrais alors, si c'est le premier frais du mois on cree une nouvelle lignes de frais
 	case 'saisirFrais':{
 		if($pdo->estPremierFraisMois($idVisiteur,$mois)){
+			$LaDate = getDateDernierJourMoisPrecedent();
+			$LaDateAnglais = dateFrancaisVersAnglais($LaDate);
+			$pdo->majPrecedentMoisCL($idVisiteur,$mois, $LaDateAnglais);
 			$pdo->creeNouvellesLignesFrais($idVisiteur,$mois);
 		}
 		break;
