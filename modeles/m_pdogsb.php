@@ -73,10 +73,13 @@ class PdoGsb{
  * @return tous les champs des lignes de frais hors forfait sous la forme d'un tableau associatif 
 */
 	public function getLesFraisHorsForfait($idVisiteur,$mois){
+		var_dump($idVisiteur);
+		var_dump($mois);
 	    $req = "select lignefraishorsforfait.id,idVisiteur,montant,mois,idfraishorsforfait ,libelle ,date from lignefraishorsforfait join fraishorsforfait on idfraishorsforfait=fraishorsforfait.id where lignefraishorsforfait.idvisiteur ='$idVisiteur' 
 		and lignefraishorsforfait.mois = '$mois' ";	
 		$res = PdoGsb::$monPdo->query($req);
 		$lesLignes = $res->fetchAll();
+		
 		return $lesLignes; 
 	}
 /**
@@ -329,7 +332,7 @@ class PdoGsb{
 		$mois = $mois-1;
 		$mois = '2019'.$mois;
 		var_dump($LaDate);
-		$req = "update ficheFrais set idEtat = 'CL', dateModif = $LaDate 
+		$req = "update ficheFrais set idEtat = 'CL', dateModif = '$LaDate' 
 		where idEtat = 'CR' and fichefrais.mois = '$mois'";
 		PdoGsb::$monPdo->exec($req);
 	}

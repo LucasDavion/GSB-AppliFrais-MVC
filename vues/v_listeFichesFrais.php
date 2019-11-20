@@ -27,7 +27,7 @@
                             //On récupère quantite
                             $montantValide = $unFrais['montantValide'];
                             ?>
-
+                            
                             <tr>
 
                                 <td><?php echo $idVisiteur ?></td>
