@@ -319,8 +319,8 @@ class PdoGsb{
 		$mois = date('m');
 		$mois = $mois-1;
 		$mois = '2019'.$mois;
-		var_dump($mois);
-		$req = "select idVisiteur, nbJustificatifs, montantValide from ficheFrais where idEtat = 'CR' and mois = $mois";
+		
+		$req = "select idVisiteur, nom, prenom, nbJustificatifs, montantValide from ficheFrais join utilisateur on idVisiteur = utilisateur.id where idEtat = 'CR' and mois = $mois";
 		$res = PdoGsb::$monPdo->query($req);
 		$lesLignes = $res->fetchAll();
 		return $lesLignes;
@@ -331,14 +331,16 @@ class PdoGsb{
 		$mois = date('m');
 		$mois = $mois-1;
 		$mois = '2019'.$mois;
-		var_dump($LaDate);
+		
 		$req = "update ficheFrais set idEtat = 'CL', dateModif = '$LaDate' 
 		where idEtat = 'CR' and fichefrais.mois = '$mois'";
 		PdoGsb::$monPdo->exec($req);
 	}
 
 	public function majPrecedentMoisCL($idVisiteur,$mois, $LaDate){
-		var_dump($mois);
+		$mois = $mois-1;
+		$mois = '2019'.$mois;
+		
 		$req = "update ficheFrais set idEtat = 'CL', dateModif = '$LaDate' 
 		where idEtat = 'CR' and fichefrais.mois = '$mois' and idVisiteur = '$idVisiteur'";
 		PdoGsb::$monPdo->exec($req);

@@ -10,32 +10,28 @@
                 <table class="table">
                     <thead>
                         <tr>
-
-                            <th scope="col">IdVisiteur</th>
+                            <th scope="col">Nom Prénom</th>
                             <th scope="col">Nombre Justificatif</th>
-                            <th scope="col">MontantValide</th>
+                            <th scope="col">Montant validé</th>
                         </tr>
                     </thead>
                     <tbody>
                         <?php
                         //On parcourt la liste lesFraisForfait
                         foreach ($lesFraisForfait as $unFrais) {
-                            //On récupère idfrais
                             $idVisiteur = $unFrais['idVisiteur'];
-                            //On récupère libelle
+                            $prenom = $unFrais['nom'];
+                            $nom = $unFrais['prenom'];
                             $nbJustificatifs = $unFrais['nbJustificatifs'];
-                            //On récupère quantite
+                            
                             $montantValide = $unFrais['montantValide'];
                             ?>
-                            
-                            <tr>
 
-                                <td><?php echo $idVisiteur ?></td>
+                            <tr>
+                                <td><?php echo $nom." ".$prenom ?></td>
                                 <td><?php echo $nbJustificatifs ?></td>
                                 <td><?php echo $montantValide ?></td>
-
                             </tr>
-
                         <?php
                         }
                         ?>
@@ -44,9 +40,7 @@
             </fieldset>
         </div>
         <div class="piedForm">
-            
                     <!-- Bouton valider -->
                     <input id="ok" type="submit" value="Valider" size="20" />
-                
         </div>
     </form>

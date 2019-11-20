@@ -10,17 +10,28 @@ $action = $_REQUEST['action'];
 
 switch ($action) {
     case 'affListNonCL':
-    $lesFraisForfait = $pdo->getLesFichesFraisMoisPrecedentNonCloturer();
-    include("vues/v_listeFichesFrais.php");
+    if ($lesFraisForfait = $pdo->getLesFicheFraisCR()) {
+        include("vues/v_listeFichesFrais.php");
+    }else {
+        $message = "Aucune fiche à cloturer";
+        include("vues/v_etatFichesFrais.php");
+       
+    }
         break;
 
     case 'valideMajFraisEtat':
     try {
         $LaDate = getDateDernierJourMoisPrecedent();
         $LaDateAnglais = dateFrancaisVersAnglais($LaDate);
-        $pdo->majEtatFicheFraisCL($LaDateAnglais);
-        $lesFraisForfait = $pdo->getLesFichesFraisMoisPrecedentNonCloturer();
-        include("vues/v_listeFichesFrais.php");
+        $pdo->majFicheFraisCL($LaDateAnglais);
+        if ($lesFraisForfait = $pdo->getLesFicheFraisCR()) {
+            include("vues/v_listeFichesFrais.php");
+        }else {
+            $message = "Toutes les fiches de frais ont etait clorturer";
+            include("vues/v_etatFichesFrais.php");
+            
+        }
+
     } catch (\Throwable $th) {
         ajouterErreur("Erreur lors de la modification : $th");
 			include("vues/v_erreurs.php");
