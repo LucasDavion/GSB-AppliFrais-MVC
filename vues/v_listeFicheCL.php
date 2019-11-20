@@ -1,3 +1,4 @@
+
 <div id="contenu">
     <form method="POST"  action="index.php?uc=gererValidant&action=affichageFF_FHF">
     <select name="lstFicheFrais" onchange="this.form.submit();">
@@ -5,15 +6,22 @@
         <?php
 			foreach ($lesFichesFraisCL as $uneFiche)
 			{
-
+        
                 $idFicheFrais =$uneFiche['idVisiteur']."-".$uneFiche['mois'];
 
                 $nomVisiteur =$uneFiche['nom'];
 
                 $prenomVisiteur =$uneFiche['prenom'];
+
+                if($lstFicheFrais==$idFicheFrais){
 				?>
-				<option value="<?php echo $idFicheFrais ?>"><?php echo $nomVisiteur." ".$prenomVisiteur ?></option>
+				<option selected value="<?php echo $idFicheFrais ?>"><?php echo $nomVisiteur." ".$prenomVisiteur ?></option>
 				<?php
+          }else{
+            ?>
+            <option value="<?php echo $idFicheFrais ?>"><?php echo $nomVisiteur." ".$prenomVisiteur ?></option>
+            <?php
+          }
 			}
 		?>
 	</select>

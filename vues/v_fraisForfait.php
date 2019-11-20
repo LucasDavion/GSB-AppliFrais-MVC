@@ -3,7 +3,6 @@
   <fieldset>
     <legend>Eléments forfaitisés
     </legend>
-    <h2>Fiche de frais de <?php echo $idFicheFrais[0]." ".$idFicheFrais[1] ?></h2>
     <?php
     //On parcourt la liste lesFraisForfait
     foreach ($lesFraisForfait as $unFrais)
@@ -14,12 +13,18 @@
       $libelle = $unFrais['libelle'];
       //On récupère quantite
       $quantite = $unFrais['quantite'];
+
+      $idVisiteur=$unFrais['idVisiteurV'];
+
+      $mois=$unFrais['moisV'];
       ?>
       <p>
         <!-- On affiche le libelle -->
         <label for="idFrais"><?php echo $libelle ?></label>
         <!-- On affiche la quantite -->
         <input type="text" id="idFrais" name="lesFrais[<?php echo $idFrais?>]" size="10" maxlength="5" value="<?php echo $quantite?>" >
+        <input name="idVisiteurValid" type="hidden" value="<?php echo $idVisiteur?>">
+        <input name="moisValid" type="hidden" value="<?php echo $mois?>">
       </p>
 
     <?php

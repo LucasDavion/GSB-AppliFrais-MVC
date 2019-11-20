@@ -110,6 +110,16 @@ class PdoGsb{
 		$lesLignes = $res->fetchAll();
 		return $lesLignes;
 	}
+	public function getLesFraisForfaitValidant($idVisiteur, $mois){
+		$req = "select lignefraisforfait.idvisiteur as idVisiteurV, lignefraisforfait.mois as moisV, fraisforfait.id as idfrais, fraisforfait.libelle as libelle,
+		lignefraisforfait.quantite as quantite from lignefraisforfait inner join fraisforfait
+		on fraisforfait.id = lignefraisforfait.idfraisforfait
+		where lignefraisforfait.idvisiteur ='$idVisiteur' and lignefraisforfait.mois='$mois'
+		order by lignefraisforfait.idfraisforfait";
+		$res = PdoGsb::$monPdo->query($req);
+		$lesLignes = $res->fetchAll();
+		return $lesLignes;
+	}
 /**
  * Retourne tous les id de la table FraisForfait
 
@@ -155,9 +165,9 @@ class PdoGsb{
 				ajouterErreur("Le nombre de nuitées est trop élevé");
 				include("vues/v_erreurs.php");
 			}else{
-			$req = "update lignefraisforfait set lignefraisforfait.quantite = $qte
+			$req = "update lignefraisforfait set lignefraisforfait.quantite = $qte, dateModif='$dateModif', idUtilisateur='$idVisiteurModif'
 			where lignefraisforfait.idvisiteur = '$idVisiteur' and lignefraisforfait.mois = '$mois'
-			and lignefraisforfait.idfraisforfait = '$unIdFrais' and dateModif='$dateModif' and idUtilisateur='$idVisiteurModif'";
+			and lignefraisforfait.idfraisforfait = '$unIdFrais'";
 			PdoGsb::$monPdo->exec($req);
 			}
 		}
@@ -259,7 +269,7 @@ class PdoGsb{
 		PdoGsb::$monPdo->exec($req);
 	}
 	public function supprimerFraisHorsForfaitValidant($idFrais){
-		$req = "update lignefraishorsforfait set suppO/N='O' where lignefraishorsforfait.id =$idFrais ";
+		$req = "update lignefraishorsforfait set supp='O' where lignefraishorsforfait.id =$idFrais ";
 		PdoGsb::$monPdo->exec($req);
 	}
 /**
@@ -349,6 +359,12 @@ class PdoGsb{
 		$res = PdoGsb::$monPdo->query($req);
 		$lesLigne = $res->fetchAll();
 		return $lesLigne;
+	}
+
+	public function validerFicheFrais($idViteur){
+		$req = "update ficheFrais set idVisiteurValide = '$idVisiteur'
+		where fichefrais.idvisiteur ='$idVisiteurValid' and fichefrais.mois = '$moisValid'";
+		PdoGsb::$monPdo->exec($req);
 	}
 
 }
