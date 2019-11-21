@@ -9,8 +9,6 @@ $numAnnee =substr( $mois,0,4);
 $numMois =substr( $mois,4,2);
 $action = $_REQUEST['action'];
 
-var_dump($idGrade);
-
 // selection des diferante action a realiser en fonction de se qui se trouve dans $action et par exention dans $_request[action]
 switch($action){
 	// si action contrien saisireFrais alors, si c'est le premier frais du mois on cree une nouvelle lignes de frais
@@ -32,7 +30,6 @@ switch($action){
 	}
 	// si action contien validerCrationFrais on intitalise des variable avec le $_get si il y a des erreur on appelle v_erreurs.php
 	case 'validerCreationFrais':{
-		var_dump($idGrade);
 		$dateFrais = $_REQUEST['dateFrais'];
 		$lstLibelle = $_REQUEST['lstLibelle'];
 		$montant = $_REQUEST['montant'];

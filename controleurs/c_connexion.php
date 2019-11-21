@@ -34,9 +34,15 @@ switch($action){
 			$nom = $visiteur['nom'];
 			$prenom = $visiteur['prenom'];
 			$grade = $visiteur['grade'];
-			creerVarSession($id,$nom,$prenom,$grade);
-			//on inclue le v_sommaire.php
-			include("vues/v_sommaire.php");
+			$typeUtilisateur = $visiteur['idTypeUtilisateur'];
+			creerVarSession($id,$nom,$prenom,$grade, $typeUtilisateur);
+			if ($typeUtilisateur = '2') {
+				//on inclue le v_sommaire_EmpCompt.php
+				include("vues/v_sommaire_EmpCompt.php");
+			} else {
+				//on inclue le v_sommaire.php
+				include("vues/v_sommaire.php");
+			}
 			//on inclue le v_accueil.php
 			include("vues/v_accueil.php");
 		}

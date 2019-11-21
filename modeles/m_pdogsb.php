@@ -54,8 +54,8 @@ class PdoGsb{
  * @return l'id, le nom et le prénom sous la forme d'un tableau associatif
 */
 	public function getInfosVisiteur($login, $mdp){
-		$req = "select visiteur.id as id, visiteur.nom as nom, visiteur.prenom as prenom, visiteur.idGrade as grade from visiteur
-		where visiteur.login='$login' and visiteur.mdp='$mdp' and visiteur.dateDepart IS NULL";
+		$req = "select utilisateur.id as id, utilisateur.nom as nom, utilisateur.prenom as prenom, utilisateur.idGrade as grade, utilisateur.idTypeUtilisateur from utilisateur
+		where utilisateur.login='$login' and utilisateur.mdp='$mdp' and utilisateur.dateDepart IS NULL";
 		$rs = PdoGsb::$monPdo->query($req);
 		$ligne = $rs->fetch();
 		return $ligne;
@@ -322,5 +322,42 @@ class PdoGsb{
 		$lesLignes = $res->fetchAll();
 		return $lesLignes;
 	}
+
+  public function getLesFFRbEnFonctionDuGrade($mois, $idGrade){
+    $req = "SELECT SUM(montantValide) FROM fichefrais JOIN etat ON etat.id = idEtat JOIN visiteur on visiteur.id = idVisiteur JOIN grade on visiteur.idGrade = grade.id WHERE idEtat = 'RB' AND mois = '$mois' AND idgrade = '$idGrade'";
+    $res = PdoGsb::$monPdo->query($req);
+    $leTotal =  $res->fetch();
+    return $leTotal;
+  }
+
+  public function getLesGrades(){
+    $req = "SELECT * FROM grade";
+    $res = PdoGsb::$monPdo->query($req);
+    $lesLignes = $res->fetchAll();
+    return $lesLignes;
+  }
+  /**
+   * Retourne les mois
+
+   * @return un tableau associatif de clé un mois -aaaamm- et de valeurs l'année et le mois correspondant
+  */
+  	public function getLesMois(){
+  		$req = "SELECT DISTINCT mois FROM ficheFrais";
+  		$res = PdoGsb::$monPdo->query($req);
+  		$lesMois =array();
+  		$laLigne = $res->fetch();
+  		while($laLigne != null)	{
+  			$mois = $laLigne['mois'];
+  			$numAnnee =substr( $mois,0,4);
+  			$numMois =substr( $mois,4,2);
+  			$lesMois["$mois"]=array(
+  		     "mois"=>"$mois",
+  		    "numAnnee"  => "$numAnnee",
+  			"numMois"  => "$numMois"
+               );
+  			$laLigne = $res->fetch();
+  		}
+  		return $lesMois;
+  	}
 }
 ?>

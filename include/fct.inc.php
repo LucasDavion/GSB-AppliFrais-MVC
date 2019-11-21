@@ -20,9 +20,10 @@ function estConnecte(){
  * @param $nom
  * @param $prenom
  */
-function creerVarSession($id,$nom,$prenom,$grade){
+function creerVarSession($id,$nom,$prenom,$grade,$typeUtilisateur){
 	$_SESSION['idVisiteur']= $id;
   $_SESSION['idGradeVisiteur']=$grade;
+  $_SESSION['idTypeUtilisateur']=$typeUtilisateur;
 
 }
 /**

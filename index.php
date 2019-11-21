@@ -14,7 +14,7 @@ $estConnecte = estConnecte();
 
 if(!isset($_REQUEST['uc']) || !$estConnecte){
      $_REQUEST['uc'] = 'connexion';
-}	 
+}
 $uc = $_REQUEST['uc'];
 switch($uc){
 	//si uc = connexion
@@ -33,9 +33,12 @@ switch($uc){
 	case 'etatFrais' :{
 		//on inclue le c_etatFrais.php
 		include("controleurs/c_etatFrais.php");
-		break; 
+		break;
 	}
+  case 'etatFFRb':
+    //on inclue le c_etatFFRb.php
+    include("controleurs/c_etatFFRb.php");
+    break;
 }
 include("vues/v_pied.php") ;
 ?>
-
