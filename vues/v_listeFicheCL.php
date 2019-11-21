@@ -1,7 +1,7 @@
 
 <div id="contenu">
     <form method="POST"  action="index.php?uc=gererValidant&action=affichageFF_FHF">
-    <select name="lstFicheFrais" onchange="this.form.submit();">
+    Veuillez saisir une fiche de frais : <select name="lstFicheFrais" onchange="this.form.submit();">
       <option value="0">Aucune fiche de frais</option>
         <?php
 			foreach ($lesFichesFraisCL as $uneFiche)
