@@ -7,8 +7,8 @@
 				<label for="lstEtat" accesskey="n">Etat : </label>
 				<!-- Liste déroulante lstMois -->
 				<select id="lstEtat" name="lstEtat">
-                    <?php $etatASelectionner = 1;
-                    var_dump($lesEtats);
+                    <?php 
+                    
 					//On parcourt la liste lesMois
 					foreach ($lesEtats as $unEtat)
 					{
@@ -36,12 +36,12 @@
 				</select>
 			</p>
 		</div>
+		
 		<div class="piedForm">
 			<p>
 				<!-- Bouton valider -->
 				<input id="ok" type="submit" value="Valider" size="20" />
-				<!-- Bouton effacer -->
-				<input id="annuler" type="reset" value="Effacer" size="20" />
+				
 			</p> 
 		</div>
 	</form>

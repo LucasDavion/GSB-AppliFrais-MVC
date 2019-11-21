@@ -347,8 +347,29 @@ class PdoGsb{
 	}
 
 	public function getLesFichesFraisParVisiteur($idVisiteur,$etat){
-		$req = "select mois, nbJustificatifs, montantValide, dateModif where idVisiteur = '$idVisiteur' and idEtat = $etat";
-		PdoGsb::$monPdo->exec($req);
+		$req = "select mois, nbJustificatifs, montantValide, dateModif from fichefrais join visiteur on idVisiteur = visiteur.id where idVisiteur = '$idVisiteur' and idEtat = '$etat' ";
+		$res = PdoGsb::$monPdo->query($req);
+		$lesLignes = $res->fetchAll();
+		$lesEtatsFicheFrais =array();
+		foreach ($lesLignes as $laLigne) {
+			$mois = $laLigne['mois'];
+			$numAnnee=substr( $mois,0,4);
+			$numMois =substr( $mois,4,2);
+			$nbJustificatifs = $laLigne['nbJustificatifs'];
+			$montantValide = $laLigne['montantValide'];
+			$dateModif = $laLigne['dateModif'];
+			$dateEnFr = dateAnglaisVersFrancais($dateModif);
+			
+			$lesEtatsFicheFrais[]=array(
+		     "nbJustificatifs"=>"$nbJustificatifs",
+		    "numAnnee"  => "$numAnnee",
+			"numMois"  => "$numMois",
+			"montantValide" => "$montantValide",
+			"dateModif" => "$dateEnFr"
+             );
+		}
+		return $lesEtatsFicheFrais;
+
 	}
 
 	public function getLesEtatsDisponibles(){

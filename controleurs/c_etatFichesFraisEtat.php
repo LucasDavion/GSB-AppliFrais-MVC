@@ -20,33 +20,20 @@ switch($action){
 	//Si action = voirEtatFrais
 	case 'voirEtatFichesFrais':{
 		//On récupère le mois selectionné
-		$leMois = $_REQUEST['lstMois']; 
+		
+		
 		//On récupère la liste des mois
-		$lesMois=$pdo->getLesMoisDisponibles($idVisiteur);
-		$moisASelectionner = $leMois;
-		//On inclue v_listeMois.php
-		include("vues/v_listeMois.php");
+		$lesEtats=$pdo->getLesEtatsDisponibles();
+		$etatASelectionner = $_REQUEST['lstEtat'];
+		
 		//On récupère la liste des frais hors forfait
-		$lesFraisHorsForfait = $pdo->getLesFraisHorsForfait($idVisiteur,$leMois);
-		//On récupère la liste des frais forfait
-		$lesFraisForfait= $pdo->getLesFraisForfait($idVisiteur,$leMois);
-		//On récupère la liste des informations de la fiche des frais
-		$lesInfosFicheFrais = $pdo->getLesInfosFicheFrais($idVisiteur,$leMois);
-		$numAnnee =substr( $leMois,0,4);
-		$numMois =substr( $leMois,4,2);	
-		//On récupère le montant validé dans la liste lesInfosFicheFrais	
-		$montantValide = $lesInfosFicheFrais['montantValide'];
-		//On récupère le nombre de justifiactifs dans la liste lesInfosFicheFrais
-		$nbJustificatifs = $lesInfosFicheFrais['nbJustificatifs'];
-		//On récupère la date de la dernière modifiaction validé dans la liste lesInfosFicheFrais
-		$dateModif =  $lesInfosFicheFrais['dateModif'];
-		//Conversion de la date en format français
-		$dateModif =  dateAnglaisVersFrancais($dateModif);
-		//on recupere l'etat
-		$etatLibelle = $lesInfosFicheFrais['libelleEtat'];
 
-		//On inclue v_etatFrais.php
-		include("vues/v_etatFrais.php");
+		$lesEtatsFicheFrais = $pdo->getLesFichesFraisParVisiteur($idVisiteur,$etatASelectionner);
+		
+
+		include("vues/v_listeEtatFichesFraisVisiteur.php");
+		include("vues/v_listFicheFraisParEtat.php");
+
 	}
 }
 ?>
