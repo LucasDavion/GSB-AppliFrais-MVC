@@ -27,7 +27,7 @@
                             <tr>
                                 <td><?php echo $nom . " " . $prenom ?></td>
                                 <td><?php echo $nbJustificatifs ?></td>
-                                <td><?php echo $montantValide ?></td>
+                                <td><?php echo $montantValide ?> €</td>
                             </tr>
                         <?php
                         }
