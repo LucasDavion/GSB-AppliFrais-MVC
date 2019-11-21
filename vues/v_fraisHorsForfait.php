@@ -17,7 +17,7 @@ $montant =0;
 		foreach( $lesFraisHorsForfait as $unFraisHorsForfait) 
 		{
 			//On récupère libelle
-			$libelle = $unFraisHorsForfait['idfraishorsforfait'];
+			$libelle = $unFraisHorsForfait['libelle'];
 			//On récupère date
 			$date = $unFraisHorsForfait['date'];
 			//On récupère montant
@@ -39,8 +39,5 @@ $montant =0;
 		<?php		 
 		  
 		}
-		?>	                                           
+		?>                                           
 	</table>
-</div>
-  
-

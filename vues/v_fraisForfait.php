@@ -14,9 +14,6 @@
       //On récupère quantite
       $quantite = $unFrais['quantite'];
 
-      $idVisiteur=$unFrais['idVisiteurV'];
-
-      $mois=$unFrais['moisV'];
       ?>
       <p>
         <!-- On affiche le libelle -->
@@ -26,10 +23,10 @@
         <input name="idVisiteurValid" type="hidden" value="<?php echo $idVisiteur?>">
         <input name="moisValid" type="hidden" value="<?php echo $mois?>">
       </p>
-
     <?php
     }
     ?>
+    <input name="lstFicheFrais" type="hidden" value="<?php echo $lstFicheFrais?>">
   </fieldset>
 </div>
 <div class="piedForm">

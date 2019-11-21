@@ -24,6 +24,8 @@ $montant =0;
 			$montant=$unFraisHorsForfait['montant'];
 			//On récupère id
 			$id = $unFraisHorsForfait['id'];
+
+			$supp = $unFraisHorsForfait['supp']
 		?>		
 			<tr>
 				<!-- On affiche la date -->
@@ -33,8 +35,16 @@ $montant =0;
 				<!-- On affiche le montant -->
 				<td><?php echo $montant ?></td>
 				<!-- Suppression du frais -->
+				<?php if($supp=='N'){?>
 				<td><a href="index.php?uc=gererFrais&action=supprimerFrais&idFrais=<?php echo $id ?>" 
 				onclick="return confirm('Voulez-vous vraiment supprimer ce frais?');">Supprimer ce frais</a></td>
+				<?php
+				}else{
+					?>
+					<td><a>Ce frais à été supprimer</a></td>
+					<?php
+				}
+				?>
 			 </tr>
 		<?php		 
 		  
