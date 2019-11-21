@@ -77,9 +77,24 @@ class PdoGsb{
 	    from lignefraishorsforfait 
 	    join fraishorsforfait on idfraishorsforfait=fraishorsforfait.id 
 	    where lignefraishorsforfait.idvisiteur ='$idVisiteur' and lignefraishorsforfait.mois = '$mois' ";
-	    echo $req;
 		$res = PdoGsb::$monPdo->query($req);
 		$lesLignes = $res->fetchAll();
+		return $lesLignes; 
+	}
+
+
+
+	public function getTousLesFHF($mois, $libelle){
+	    $req = "select SUM(lignefraishorsforfait.montant) as montant
+
+				FROM lignefraishorsforfait 
+
+				JOIN fraishorsforfait on idfraishorsforfait=fraishorsforfait.id
+				JOIN fichefrais on fichefrais.idVisiteur = lignefraishorsforfait.idVisiteur and fichefrais.mois = lignefraishorsforfait.mois
+
+				where lignefraishorsforfait.mois = '$mois' and idFraisHorsForfait = $libelle and idEtat = 'RB'";
+		$res = PdoGsb::$monPdo->query($req);
+		$lesLignes = $res->fetch();
 		return $lesLignes; 
 	}
 /**
@@ -212,7 +227,6 @@ class PdoGsb{
 		}
 		$req = "insert into fichefrais(idvisiteur,mois,nbJustificatifs,montantValide,dateModif,idEtat) 
 		values('$idVisiteur','$mois',0,0,now(),'CR')";
-		echo $req;
 		PdoGsb::$monPdo->exec($req);
 		$lesIdFrais = $this->getLesIdFrais();
 		foreach($lesIdFrais as $uneLigneIdFrais){
@@ -236,7 +250,6 @@ class PdoGsb{
 		$dateFr = dateFrancaisVersAnglais($date);
 		$req = "insert into lignefraishorsforfait 
 		values(0,'$idVisiteur','$mois','$dateFr','$montant','$lstLibelle')";
-		echo $req;
 		PdoGsb::$monPdo->exec($req);
 	}
 /**
@@ -257,6 +270,27 @@ class PdoGsb{
 	public function getLesMoisDisponibles($idVisiteur){
 		$req = "select fichefrais.mois as mois from  fichefrais where fichefrais.idvisiteur ='$idVisiteur' 
 		order by fichefrais.mois desc ";
+		$res = PdoGsb::$monPdo->query($req);
+		$lesMois =array();
+		$laLigne = $res->fetch();
+		while($laLigne != null)	{
+			$mois = $laLigne['mois'];
+			$numAnnee =substr( $mois,0,4);
+			$numMois =substr( $mois,4,2);
+			$lesMois["$mois"]=array(
+		     "mois"=>"$mois",
+		    "numAnnee"  => "$numAnnee",
+			"numMois"  => "$numMois"
+             );
+			$laLigne = $res->fetch(); 		
+		}
+		return $lesMois;
+	}
+
+// requette pour recuperer tout les mois qui on ete enregistre dans la bdd
+
+	public function getTousLesMois(){
+		$req = "select DISTINCT fichefrais.mois as mois from fichefrais order by fichefrais.mois desc  ";
 		$res = PdoGsb::$monPdo->query($req);
 		$lesMois =array();
 		$laLigne = $res->fetch();
@@ -321,7 +355,6 @@ class PdoGsb{
 		$mois = date('m');
 		$mois = $mois-1;
 		$mois = '2019'+ $mois;
-		var_dump($mois);
 		$req = "select idVisiteur, nbJustificatifs, montantValide,  from ficheFrais where idEtat = 'CL' and date";
 		$res = PdoGsb::$monPdo->query($req);
 		$lesLignes = $res->fetchAll();

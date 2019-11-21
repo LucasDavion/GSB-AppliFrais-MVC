@@ -1,10 +1,10 @@
  <div id="contenu">
 	<h2>Consultation de l'etat des frais hors forfait.</h2>
 	<h3>Mois à sélectionner : </h3>
-	<form action="index.php?uc=etatFHFRb&action=consultationEtatFHFRb" method="post">
+	<form action="index.php?uc=etatFHFRb&action=voirEtatFHF" method="post">
 		<div class="corpsForm">
 			<p>
-				<label for="lstMois" accesskey="n">Mois : </label>
+				<label for="lstMois" accesskey="n">Mois :</label>
 				<!-- Liste déroulante lstMois -->
 				<select id="lstMois" name="lstMois">
 					<?php
@@ -33,12 +33,16 @@
 					}
 				   ?>    	
 				</select>
-				<br>
+			</p>
+			<p>
+<!------------------------------------------------------------------------------------------------->
+				<label for="lstLibelleHF" accesskey="n">Libelle :</label>
+				<!-- Liste déroulante lstLibelleHF-->
 
-				<label for="lstLibelleHF" accesskey="n">Libelle : </label>
-				<!-- Liste déroulante lstLibelleHF -->
+
+
 				<select id="lstLibelleHF" name="lstLibelle">
-				  <?php
+				<?php
 				//On parcourt la liste lesTypesFraisHorsForfait
 				foreach ($lesTypesFraisHorsForfait as $unFraisH)
 				{
@@ -46,13 +50,20 @@
 					$idFrais = $unFraisH['idfraisH'];
 					//On récupère libelle
 					$libellefrais = $unFraisH['libellefraisH'];
+				
+					if($idFrais == $libelleASelectionner){
 					?>
-
+					<option selected value="<?php echo $idFrais ?>"><?php echo  $libellefrais ?> </option>
+					<?php 
+					}
+					else{ ?>
 					<option value=<?php echo $idFrais ?>><?php echo $libellefrais ?></option>
-						<?php
-						}
-						?>
-				  </select>
+					
+				<?php
+					}
+				}
+				?>
+				</select>
 			</p>
 		</div>
 		<div class="piedForm">
@@ -64,3 +75,4 @@
 			</p> 
 		</div>
 	</form>
+	</div>
