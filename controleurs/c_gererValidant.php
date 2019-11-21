@@ -15,9 +15,12 @@ switch($action){
 	}
 	case 'affichageFF_FHF':{
 		$idFicheFrais=explode("-", $_REQUEST['lstFicheFrais']);
+
+		$idVisiteur=$idFicheFrais[0];
+  	$mois=$idFicheFrais[1];
 		$lesFraisForfait= $pdo->getLesFraisForfaitValidant($idFicheFrais[0], $idFicheFrais[1]);
-		$lesFraisHorsForfait= $pdo->getLesFraisHorsForfait($idFicheFrais[0], $idFicheFrais[1]);
-		$lstFicheFrais=$_POST['lstFicheFrais'];
+		$lesFraisHorsForfait= $pdo->getLesFraisHorsForfaitValidant($idFicheFrais[0], $idFicheFrais[1]);
+		$lstFicheFrais=$_REQUEST['lstFicheFrais'];
 		break;
 	}
 	// si action contien validerCrationFrais on intitalise des variable avec le $_get si il y a des erreur on appelle v_erreurs.php
@@ -26,15 +29,23 @@ switch($action){
 		$moisValid=$_REQUEST['moisValid'];
 		$lesFrais = $_REQUEST['lesFrais'];
 		$pdo->majFraisForfaitValidant($idVisiteurValid,$moisValid,$lesFrais,$date,$idVisiteur);
+		echo "Les modifications ont été prises en compte";
+
 	  break;
 	}
 	case 'supprimerFHF':{
 		$idFrais = $_REQUEST['idFrais'];
 			$pdo->supprimerFraisHorsForfaitValidant($idFrais);
+
+			echo "Le frais hors forfait a été supprimé";
 		break;
     }
     case 'validerFicheFrais':{
-			$pdo->validerFicheFrais($idVisiteur);
+			$idVisiteurValid=$_REQUEST['idVisiteurValid'];
+			$moisValid=$_REQUEST['moisValid'];
+			$lstFicheFrais=$_REQUEST['lstFicheFrais'];
+			$pdo->validerFicheFrais($idVisiteur,$idVisiteurValid,$moisValid);
+			echo "La fiche de frais a été validée";
 		break;
     }
 }
@@ -44,5 +55,6 @@ include("vues/v_listeFicheCL.php");
 if($action=='affichageFF_FHF'){
 include("vues/v_fraisForfait.php");
 include("vues/v_fraisHorsForfait.php");
+include("vues/v_valideFicheFrais.php");
 }
 ?>
