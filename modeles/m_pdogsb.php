@@ -73,8 +73,15 @@ class PdoGsb{
  * @return tous les champs des lignes de frais hors forfait sous la forme d'un tableau associatif
 */
 	public function getLesFraisHorsForfait($idVisiteur,$mois){
+	    $req = "select lignefraishorsforfait.id,idVisiteur,supp,montant,mois,idfraishorsforfait ,libelle ,date from lignefraishorsforfait join fraishorsforfait on idfraishorsforfait=fraishorsforfait.id where lignefraishorsforfait.idvisiteur ='$idVisiteur'
+		and lignefraishorsforfait.mois = '$mois'";
+		$res = PdoGsb::$monPdo->query($req);
+		$lesLignes = $res->fetchAll();
+		return $lesLignes;
+	}
+	public function getLesFraisHorsForfaitValidant($idVisiteur,$mois){
 	    $req = "select lignefraishorsforfait.id,idVisiteur,montant,mois,idfraishorsforfait ,libelle ,date from lignefraishorsforfait join fraishorsforfait on idfraishorsforfait=fraishorsforfait.id where lignefraishorsforfait.idvisiteur ='$idVisiteur'
-		and lignefraishorsforfait.mois = '$mois' ";
+		and lignefraishorsforfait.mois = '$mois' and supp='N'";
 		$res = PdoGsb::$monPdo->query($req);
 		$lesLignes = $res->fetchAll();
 		return $lesLignes;
@@ -361,8 +368,9 @@ class PdoGsb{
 		return $lesLigne;
 	}
 
-	public function validerFicheFrais($idViteur){
-		$req = "update ficheFrais set idVisiteurValide = '$idVisiteur'
+
+	public function validerFicheFrais($idUtilisateur,$idVisiteurValid,$moisValid){
+		$req = "update ficheFrais set idUtilisateurValide = '$idUtilisateur', idEtat='VA'
 		where fichefrais.idvisiteur ='$idVisiteurValid' and fichefrais.mois = '$moisValid'";
 		PdoGsb::$monPdo->exec($req);
 	}
